@@ -11,10 +11,10 @@ function [P, K, R, t, error] = runDLT(xy, XYZ)
 [Pn] = dlt(xy_normalized, XYZ_normalized);
 
 % TODO denormalize projection matrix
-
+P = inv(T)*Pn*U;
 %factorize projection matrix into K, R and t
 [K, R, t] = decompose(P);   
 
 % TODO compute average reprojection error
-
+error = 0;
 end

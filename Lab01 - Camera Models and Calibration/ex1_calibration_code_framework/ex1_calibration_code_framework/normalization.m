@@ -57,7 +57,7 @@ T2 = 1/xy_meanDist;
 U2 = 1/XYZ_meanDist; 
 
 % TODO 4. create T and U transformation matrices (similarity
-% transformation).
+% transformation)
 T = T1*T2;
 T(3,3) = 1;
 U = U1*U2;
@@ -65,7 +65,7 @@ U(4,4) = 1;
 
 % TODO 5. normalize the points according to the transformations
 
-xy_normalized = T*xy
+xy_normalized = T*xy;
 XYZ_normalized = U*XYZ;
 
 end

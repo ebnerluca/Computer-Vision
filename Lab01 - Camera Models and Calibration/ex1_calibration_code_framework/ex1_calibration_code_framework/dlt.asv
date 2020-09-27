@@ -28,9 +28,5 @@ end
 
 % TODO 3. Compute P_normalized (=last column of V if D = matrix with positive
 % diagonal entries arranged in descending order)
-P_normalized_vector = V(:,end);
-P_normalized = [P_normalized_vector(1:4)';
-                P_normalized_vector(5:8)';
-                P_normalized_vector(9:12)'];
 
 end
