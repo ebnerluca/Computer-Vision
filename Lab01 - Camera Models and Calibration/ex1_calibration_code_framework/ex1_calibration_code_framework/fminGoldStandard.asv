@@ -12,10 +12,10 @@ numOfPoints = size(xy_normalized, 2);
 
 xy_normalized_reprojected = P*XYZ_normalized;
 for i=1:numOfPoints %normalize
-    xy_normalized_reprojected(:,i) = xy_normalized_reprojected(:,i) / xy_normalized_reprojected(3,i);
+    xy__normalizedreprojected(:,i) = xy_reprojected(:,i) / xy_reprojected(3,i);
 end
 
-diff = xy_normalized_reprojected - xy_normalized;
+diff = xy_reprojected - xy_normalized;
 
 % TODO compute cost function value
 error = 0;

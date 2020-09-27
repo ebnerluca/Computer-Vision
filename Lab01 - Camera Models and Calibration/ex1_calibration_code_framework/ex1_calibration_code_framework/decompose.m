@@ -12,7 +12,7 @@ K = inv(K_inv);
 
 % TODO Compute camera center C=(cx,cy,cz) such P*C=0 
 [U, S, V] = svd(P);
-C = V(:, end)
+C = V(:, end);
 
 % TODO normalize K such K(3,3)=1
 scale = K(3,3);
@@ -24,6 +24,6 @@ detR = det(R);
 R = R / nthroot(detR, R_rows); %ensure that  R has det(R) == 1
 
 % TODO Compute translation t=-R*C
-% C / C(end); needed?
+% C = C / C(end); needed?
 t = -R*C(1:3);
 end

@@ -1,7 +1,7 @@
 % Exercise 1
 %
-%clear all;
-%close all;
+clear all;
+close all;
 
 IMG_NAME = 'images/image001.jpg';
 
@@ -16,10 +16,10 @@ IMG_NAME = 'images/image001.jpg';
 %[xy, XYZ] = getpoints(IMG_NAME);
 
 % === Task 1 Data normalization ===
-[xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
+%[xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
 
 % === Task 2 DLT algorithm ===
-[P, K, R, t, error] = runDLT(xy, XYZ)
+%[P, K, R, t, error] = runDLT(xy, XYZ)
 visualization_reprojected_points(xy, XYZ, P, IMG_NAME);
 
 % === Task 3 Gold Standard algorithm ===
