@@ -19,11 +19,19 @@ scale = K(3,3);
 K = K / scale;
 
 % TODO Adjust matrices R and Q so that the diagonal elements of K (= intrinsic matrix) are non-negative values and R (= rotation matrix = orthogonal) has det(R)=1
+for i=1:3
+    if K(i,i) < 0
+        K(:,i) = -K(:,i);
+        R(i,:) = -R(i,:);
+    end
+end
+
+
 detR = det(R);
 [R_rows, R_columns] = size(R);
 R = R / nthroot(detR, R_rows); %ensure that  R has det(R) == 1
 
 % TODO Compute translation t=-R*C
-% C = C / C(end); needed?
+C = C / C(end);
 t = -R*C(1:3);
 end

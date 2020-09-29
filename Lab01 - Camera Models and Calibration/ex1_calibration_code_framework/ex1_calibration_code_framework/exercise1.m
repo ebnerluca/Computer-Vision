@@ -22,6 +22,12 @@ IMG_NAME = 'images/image001.jpg';
 [P, K, R, t, error] = runDLT(xy, XYZ)
 visualization_reprojected_points(xy, XYZ, P, IMG_NAME);
 
+%Test if decomposition is correct:
+%visualization_reprojected_points(xy, XYZ, K*[R t], IMG_NAME);
+
 % === Task 3 Gold Standard algorithm ===
 [P, K, R, t, error] = runGoldStandard(xy, XYZ)
 visualization_reprojected_points(xy, XYZ, P, IMG_NAME);
+
+%Test if decomposition is correct:
+%visualization_reprojected_points(xy, XYZ, K*[R t], IMG_NAME);
