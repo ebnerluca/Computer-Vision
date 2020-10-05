@@ -13,7 +13,7 @@ IMG_NAME = 'images/image001.jpg';
 %point.
 %You don't have to do this all the time, just store the resulting xy and
 %XYZ matrices and use them as input for your algorithms.
-%[xy, XYZ] = getpoints(IMG_NAME);
+[xy, XYZ] = getpoints(IMG_NAME);
 
 % === Task 1 Data normalization ===
 [xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
@@ -22,12 +22,18 @@ IMG_NAME = 'images/image001.jpg';
 [P, K, R, t, error] = runDLT(xy, XYZ)
 visualization_reprojected_points(xy, XYZ, P, IMG_NAME);
 
+%Test to visualize all checkerboard corners:
+%visualize_checkerboard_corners(P, IMG_NAME) 
+        
 %Test if decomposition is correct:
-%visualization_reprojected_points(xy, XYZ, K*[R t], IMG_NAME);
+%isualization_reprojected_points(xy, XYZ, K*[R t], IMG_NAME);
 
 % === Task 3 Gold Standard algorithm ===
 [P, K, R, t, error] = runGoldStandard(xy, XYZ)
 visualization_reprojected_points(xy, XYZ, P, IMG_NAME);
+
+%Test to visualize all checkerboard corners:
+%visualize_checkerboard_corners(P, IMG_NAME) 
 
 %Test if decomposition is correct:
 %visualization_reprojected_points(xy, XYZ, K*[R t], IMG_NAME);

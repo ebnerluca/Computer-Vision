@@ -8,11 +8,12 @@ function [P, K, R, t, error] = runDLT(xy, XYZ)
 [xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
 
 %compute DLT with normalized coordinates
-[Pn] = dlt(xy_normalized, XYZ_normalized);
-%%%%[P] = dlt( [xy; ones(1,size(xy,2))], [XYZ; ones(1,size(xy,2))] ); %Test: compute P without normalized calibration points
+[Pn] = dlt(xy_normalized, XYZ_normalized); %compute Pn with normalized coordinates
+%[Pspecial] = dlt( [xy; ones(1,size(xy,2))], [XYZ; ones(1,size(xy,2))] ) %Test: compute P without normalized calibration points
 
 % TODO denormalize projection matrix
 P = inv(T)*Pn*U;
+
 %factorize projection matrix into K, R and t
 [K, R, t] = decompose(P);   
 
