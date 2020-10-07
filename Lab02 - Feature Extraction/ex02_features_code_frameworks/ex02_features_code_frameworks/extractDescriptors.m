@@ -11,20 +11,20 @@
 %                   represented as vector
 function [keypoints, descriptors] = extractDescriptors(img, keypoints)
 
-[img_width, img_height] = size(img);
+[img_height, img_width] = size(img);
 patchSize = 9;
 boundary = 5;
 
 newKeypoints = keypoints;
-for i=size(keypoints,2):1
-    if ( (keypoints(1,i) <= boundary) || ((img_width - keypoints(1,i)) <= boundary) ) %check x boundaries
+for i=size(keypoints,2):-1:1
+    if ( (keypoints(2,i) <= boundary) || ((img_width - keypoints(2,i)) <= boundary) ) %check x boundaries
         newKeypoints(:,i) = []; %remove keypoint
-    elseif ( (keypoints(2,i) <= boundary) || (img_height - keypoints(2,i) <= boundary) ) %check y boundaries
+    elseif ( (keypoints(1,i) <= boundary) || (img_height - keypoints(1,i) <= boundary) ) %check y boundaries
         newKeypoints(:,i) = [];
     end
 end
-keyPoints = newKeypoints;
-        
+keypoints = newKeypoints;
+
 descriptors = extractPatches(img, keypoints, patchSize);
  
 end

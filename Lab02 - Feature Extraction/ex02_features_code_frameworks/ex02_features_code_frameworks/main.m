@@ -11,15 +11,15 @@ img1 = im2double(imread(IMG_NAME1));
 img2 = im2double(imread(IMG_NAME2));
 
 % Extract Harris corners.
-sigma = 1;
+sigma = 1.5;
 k = 0.04;
-thresh = 0.000001;
+thresh = 0.00002;
 [corners1, C1] = extractHarris(img1, sigma, k, thresh);
 [corners2, C2] = extractHarris(img2, sigma, k, thresh);
 
 % Plot images with Harris corners.
- plotImageWithKeypoints(img1, corners1, 10);
- plotImageWithKeypoints(img2, corners2, 11);
+plotImageWithKeypoints(img1, corners1, 10);
+plotImageWithKeypoints(img2, corners2, 11);
 
 %%
 % 2 - Feature description and matching
@@ -54,13 +54,13 @@ matches_ow = matchDescriptors(descr1, descr2, 'one-way');
 plotMatches(img1, corners1(:, matches_ow(1, :)), img2, corners2(:, matches_ow(2, :)), 22);
 
 % Match the descriptors - mutual nearest neighbors.
-% matches_mutual = matchDescriptors(descr1, descr2, 'mutual');
+matches_mutual = matchDescriptors(descr1, descr2, 'mutual');
 
 % Plot the matches.
-% plotMatches(img1, corners1(:, matches_mutual(1, :)), img2, corners2(:, matches_mutual(2, :)), 23);
+plotMatches(img1, corners1(:, matches_mutual(1, :)), img2, corners2(:, matches_mutual(2, :)), 23);
 
 % Match the descriptors - ratio test.
-% matches_ratio = matchDescriptors(descr1, descr2, 'ratio');
+matches_ratio = matchDescriptors(descr1, descr2, 'ratio');
 
 % Plot the matches.
-% plotMatches(img1, corners1(:, matches_ratio(1, :)), img2, corners2(:, matches_ratio(2, :)), 24);
+plotMatches(img1, corners1(:, matches_ratio(1, :)), img2, corners2(:, matches_ratio(2, :)), 24);

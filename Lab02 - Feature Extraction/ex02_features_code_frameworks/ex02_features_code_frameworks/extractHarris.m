@@ -14,7 +14,7 @@
 %   C             - n x m gray scale image storing the corner strength
 function [corners, C] = extractHarris(img, sigma, k, thresh)
 
-[img_width, img_height] = size(img);
+[img_height, img_width] = size(img);
 
 %% Image gradients
 gradx_filter = [0.5, 0, -0.5];
@@ -25,39 +25,22 @@ I_y = conv2(img, grady_filter, 'same');
 %% Local auto-correlation matrix & Harris response function
 
 %blurred gradient images
-I_x_blurred = imgaussfilt(I_x, sigma);
-I_y_blurred = imgaussfilt(I_y, sigma);
+I_x_blurred = imgaussfilt(I_x.^2, sigma);
+I_y_blurred = imgaussfilt(I_y.^2, sigma);
 I_xy_blurred = imgaussfilt(I_x.*I_y, sigma);
 
 
-C = zeros(img_width, img_height);
+C = zeros(img_height, img_width);
 
 for i=1:img_width
     for j=1:img_height
 
-                M_p = [ I_x_blurred(i,j)^2,  I_xy_blurred(i,j);
-                        I_xy_blurred(i,j)    I_y_blurred(i,j)^2 ];
+                M_p = [ I_x_blurred(j,i),  I_xy_blurred(j,i);
+                        I_xy_blurred(j,i)    I_y_blurred(j,i)];
                     
-                C(i,j) = det(M_p) -k*trace(M_p)^2;   
+                C(j,i) = det(M_p) -k*trace(M_p)^2;   
     end
 end
-% for i=2:(img_width-1)
-%     for j=2:(img_height-1)
-%         
-%         M_p = [0;0];
-%         for u=-1:1
-%             for v=-1:1
-%                 
-%                 M_pk = [ I_x_blurred(i+u,j+v)^2,  I_xy_blurred(i+u,j+v);
-%                         I_xy_blurred(i+u,j+v)    I_y_blurred(i+u,j+v)^2 ];
-%                     
-%                 M_p = M_p + M_pk;
-%                 
-%             end
-%         end
-%         C(i,j) = det(M_p) -k*trace(M_p)^2;
-%     end
-% end
 
 %% Detection Criteria
  
@@ -67,8 +50,8 @@ thresholdTest = abs(C) > thresh; %returns 1 for the C(i,j) if bigger than thresh
 corners = [];
 for i=1:img_width
     for j=1:img_height
-        if (regionalMaxTest(i,j) == 1 && thresholdTest(i,j))
-            corner = [i;j];
+        if (regionalMaxTest(j,i) == 1 && thresholdTest(j,i))
+            corner = [j;i];
             corners = [corners, corner];
         end
     end
