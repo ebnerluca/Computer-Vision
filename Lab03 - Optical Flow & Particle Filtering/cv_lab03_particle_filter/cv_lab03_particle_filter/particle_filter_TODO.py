@@ -69,8 +69,8 @@ class Simulator(object):
 		# Initial robot belief is generated from the uniform distribution
 		particles = np.random.uniform(0, self.param.domain, self.param.num_particles)
 
-		#for k in range(self.param.n_steps):
-		for k in range(10): #REMOVE AFTER EDITING
+		for k in range(self.param.n_steps):
+		#for k in range(10): #REMOVE AFTER EDITING
 
 			# simulates the robot movement
 			x_true_old = x_true_k
@@ -296,7 +296,16 @@ class Simulator(object):
 		"""
 
 		# TODO: Change this value for the correct one
-		particle_weights = np.ones(self.param.num_particles)
+		#particle_weights = np.ones(self.param.num_particles)
+		
+		p_zk_given_prior_particles = self.getMeasurementModel(prior_particles) #returns probability to sense a door at the particle locations, P(zk=1|xk)
+
+		if(zk == 0):
+			p_zk_given_prior_particles = 1. - p_zk_given_prior_particles #if zk==0, then P(zk=0|xk) = 1 - P(zk=1|xk)
+
+		print(p_zk_given_prior_particles)
+
+		particle_weights = p_zk_given_prior_particles
 
 		return particle_weights
 
@@ -313,7 +322,24 @@ class Simulator(object):
 		"""
 
 		# TODO: Change this value for the correct one
-		resampled_particles = prior_particles
+		#resampled_particles = prior_particles
+
+		index = int(np.random.random() * len(prior_particles)) #initialize loop index
+		beta = 0.0 #initialize beta
+		max_weight = max(particle_weights)
+		resampled_particles = []
+
+		for i in range(len(prior_particles)):
+			
+			beta += np.random.random() * 2.0 * max_weight
+			
+			while(beta > particle_weights[index]):
+				
+				beta = beta - particle_weights[index]
+				index = (index + 1) % len(prior_particles) #make sure index wraps around when end is reached
+			
+			resampled_particles.append(prior_particles[index])
+
 
 		return resampled_particles
 
