@@ -69,7 +69,8 @@ class Simulator(object):
 		# Initial robot belief is generated from the uniform distribution
 		particles = np.random.uniform(0, self.param.domain, self.param.num_particles)
 
-		for k in range(self.param.n_steps):
+		#for k in range(self.param.n_steps):
+		for k in range(10): #REMOVE AFTER EDITING
 
 			# simulates the robot movement
 			x_true_old = x_true_k
@@ -244,7 +245,11 @@ class Simulator(object):
 		door_3 = scipy.stats.norm(self.param.door_locations[2], self.param.door_stdev).pdf(locations) / pdf_max
 
 		# TODO: Change this value for the correct one
-		measurement = 0 * locations + 0.5
+		#measurement = 0 * locations + 0.5
+
+		overlay = door_1 + door_2 + door_3 #overlay the probabilities of the doors
+		overlaySum = np.sum(overlay)
+		measurement = overlay / overlaySum #total probability must be =1
 
 		return measurement
 
@@ -264,6 +269,12 @@ class Simulator(object):
 
 		# TODO: Change this value for the correct one
 		prior_particles = particles
+
+		for i in range(len(particles)):
+			disturbedMotion = uk + np.random.normal(0, self.param.odometry_stdev); #each particle has its own disturbance
+			prior_particles[i] = np.mod(prior_particles[i] + disturbedMotion , self.param.domain) #np.mod: wrap location of particles around when they reach the end of the hallway (aka self.param.domain)
+		
+		#print(prior_particles)
 
 		return prior_particles
 
