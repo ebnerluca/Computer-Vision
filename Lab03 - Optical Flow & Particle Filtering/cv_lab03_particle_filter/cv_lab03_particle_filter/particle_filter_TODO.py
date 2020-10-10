@@ -248,8 +248,7 @@ class Simulator(object):
 		#measurement = 0 * locations + 0.5
 
 		overlay = door_1 + door_2 + door_3 #overlay the probabilities of the doors
-		overlaySum = np.sum(overlay)
-		measurement = overlay / overlaySum #total probability must be =1
+		measurement = overlay 
 
 		return measurement
 
@@ -302,8 +301,6 @@ class Simulator(object):
 
 		if(zk == 0):
 			p_zk_given_prior_particles = 1. - p_zk_given_prior_particles #if zk==0, then P(zk=0|xk) = 1 - P(zk=1|xk)
-
-		print(p_zk_given_prior_particles)
 
 		particle_weights = p_zk_given_prior_particles
 
