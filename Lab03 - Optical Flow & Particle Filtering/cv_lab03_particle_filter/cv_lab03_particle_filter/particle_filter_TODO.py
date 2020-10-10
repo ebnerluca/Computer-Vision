@@ -70,7 +70,6 @@ class Simulator(object):
 		particles = np.random.uniform(0, self.param.domain, self.param.num_particles)
 
 		for k in range(self.param.n_steps):
-		#for k in range(10): #REMOVE AFTER EDITING
 
 			# simulates the robot movement
 			x_true_old = x_true_k
@@ -321,11 +320,12 @@ class Simulator(object):
 		# TODO: Change this value for the correct one
 		#resampled_particles = prior_particles
 
-		index = int(np.random.random() * len(prior_particles)) #initialize loop index
+		index = int(np.random.random() * len(prior_particles)) #initialize random loop index, index = 0 would also be fine
 		beta = 0.0 #initialize beta
 		max_weight = max(particle_weights)
 		resampled_particles = []
 
+		## RESAMPLING WHEEL
 		for i in range(len(prior_particles)):
 			
 			beta += np.random.random() * 2.0 * max_weight
