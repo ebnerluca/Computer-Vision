@@ -246,8 +246,8 @@ class Simulator(object):
 		# TODO: Change this value for the correct one
 		#measurement = 0 * locations + 0.5
 
-		overlay = door_1 + door_2 + door_3 #overlay the probabilities of the doors
-		measurement = overlay 
+		#P(zk=1|xk) = 1 - P(zk=0|xk) = 1 - (1-P(zk1=1|xk))*(1-P(zk2=1|xk))*(1-P(zk3=1|xk))
+		measurement = 1.0 - (1.0-door_1)*(1.0-door_2)*(1.0-door_3)
 
 		return measurement
 
@@ -272,8 +272,6 @@ class Simulator(object):
 			disturbedMotion = uk + np.random.normal(0, self.param.odometry_stdev); #each particle has its own disturbance
 			prior_particles[i] = np.mod(prior_particles[i] + disturbedMotion , self.param.domain) #np.mod: wrap location of particles around when they reach the end of the hallway (aka self.param.domain)
 		
-		#print(prior_particles)
-
 		return prior_particles
 
 	# 3. Measurement of Prior Particles
