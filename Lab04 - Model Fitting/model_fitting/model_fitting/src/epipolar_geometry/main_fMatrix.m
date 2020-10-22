@@ -5,7 +5,8 @@
 clear
 addpath helpers
 
-clickPoints = true;
+%clickPoints = true;
+clickPoints = false; %matches are stored in images/matches_...
 %dataset = 0;   % Your pictures
 dataset = 1; % ladybug
 % dataset = 2; % rect

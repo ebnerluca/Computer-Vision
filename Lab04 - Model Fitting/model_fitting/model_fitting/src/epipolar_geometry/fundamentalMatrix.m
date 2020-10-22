@@ -7,4 +7,8 @@
 % 	F 		Initial fundamental matrix obtained from the eight point algorithm
 %
 function [Fh, F] = fundamentalMatrix(x1s, x2s)
+
+n1xs = normalizePoints2d(x1s);
+n2xs = normalizePoints2d(x2s);
+
 end
