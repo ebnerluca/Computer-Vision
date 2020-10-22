@@ -7,7 +7,6 @@
 %               (s.t. nx=T*x when x is in homogenous coords)
 function [nxs, T] = normalizePoints2d(xs)
 
-size_xs = size(xs)
 %counting points
 numOfPoints = size(xs,2);
 
