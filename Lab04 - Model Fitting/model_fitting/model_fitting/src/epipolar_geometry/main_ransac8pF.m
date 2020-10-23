@@ -5,6 +5,8 @@ clear
 addpath helpers
 
 %don't forget to initialize VLFeat
+addpath toolbox
+run('toolbox/vl_setup')
 
 %Load images
 % imgName1 = ''; % Try with some different pairs
@@ -25,7 +27,7 @@ x2s = [fb(1:2, matches(2,:)); ones(1,size(matches,2))];
 
 %show matches
 clf
-showFeatureMatches(img1, x1s(1:2,:), img2, x2s(1:2,:), 1);
+showFeatureMatches(img1, x1s(1:2,:), img2, x2s(1:2,:), 2);
 
 
 %%
