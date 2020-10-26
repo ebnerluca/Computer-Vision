@@ -26,6 +26,8 @@ nF = [nFvec(1:3)';
       nFvec(7:9)'];
 
 F = T2'*nF*T1;
+scale = F(3,3);
+F = F/scale;
 
 [U,S,V] = svd(F);
 S(3,3) = 0; %enforce singularity

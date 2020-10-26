@@ -54,8 +54,8 @@ end
 %% Draw epipolar lines
 
 % FF is the fundamental matrix we wish to draw epipolar lines for
-%FF = Fh
-FF = F
+FF = Fh
+%FF = F
 
 % show clicked points
 figure(1),clf, imshow(img1, []); hold on, plot(x1s(1,:), x1s(2,:), '*r');

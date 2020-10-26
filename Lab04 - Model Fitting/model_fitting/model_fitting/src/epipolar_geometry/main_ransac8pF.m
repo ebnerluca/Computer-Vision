@@ -27,7 +27,7 @@ x2s = [fb(1:2, matches(2,:)); ones(1,size(matches,2))];
 
 %show matches
 clf
-showFeatureMatches(img1, x1s(1:2,:), img2, x2s(1:2,:), 2);
+showFeatureMatches(img1, x1s(1:2,:), img2, x2s(1:2,:), 1);
 
 
 %%
@@ -35,11 +35,11 @@ showFeatureMatches(img1, x1s(1:2,:), img2, x2s(1:2,:), 2);
 % 8-point RANSAC
 % =========================================================================
 
-threshold = 5;
+threshold = 2;
 
 % TODO: implement ransac8pF
 [inliers, F] = ransac8pF(x1s, x2s, threshold);
 
-showFeatureMatches(img1, x1s(1:2, inliers), img2, x2s(1:2, inliers), 1);
+showFeatureMatches(img1, x1s(1:2, inliers), img2, x2s(1:2, inliers), 2);
 
 % =========================================================================

@@ -22,10 +22,10 @@ for i=1:iter
     b = line_coeff(2);
     
     % Compute the distances between all points with the fitting line
-    distances = (-data(2,:)+k*data(1,:)+b) / (sqrt(1+k*k)); %common formula
+    distances = abs(-data(2,:)+k*data(1,:)+b) / (sqrt(1+k*k)); %common formula
         
     % Compute the inliers with distances smaller than the threshold
-    inlier_indices = find(abs(distances) < threshold);
+    inlier_indices = find(distances < threshold);
     num_inliers = numel(inlier_indices);
     
     % Update the number of inliers and fitting model if the current model
