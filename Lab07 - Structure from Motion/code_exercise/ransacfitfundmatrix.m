@@ -81,7 +81,8 @@ function [F, inliers] = ransacfitfundmatrix(x1, x2, t, feedback)
     distfn    = @funddist;
     degenfn   = @isdegenerate;
     maxDataTrials = 100;
-    maxTrials = 2000;
+    %maxTrials = 2000;
+    maxTrials = 100000;
     % x1 and x2 are 'stacked' to create a 6xN array for ransac
     [F, inliers] = ransac([x1; x2], fittingfn, distfn, degenfn, s, t, feedback, maxDataTrials, maxTrials);
 
