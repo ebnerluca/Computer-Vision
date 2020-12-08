@@ -17,7 +17,7 @@ map = zeros(L,1);
 
 for i=1:L
     
-    text = ['Finding peak for pixel ',num2str(i),'/',num2str(L), '...'];
+    text = ['Finding peak for pixel ',num2str(i),'/',num2str(L), '...\n'];
     fprintf(text);
     
     new_peak = find_peak(X, X(i,:), r);

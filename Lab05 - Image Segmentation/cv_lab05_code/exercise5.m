@@ -26,9 +26,9 @@ figure, imshow(imglab), title('l*a*b* image');
 
 
 % (6.2)
-% [mapMS peak] = meanshiftSeg(imglab);
-% visualizeSegmentationResults (mapMS,peak);
-% disp(['Mean-Shift: peaks = ' int2str(size(peak,1))])
+[mapMS peak] = meanshiftSeg(imglab);
+visualizeSegmentationResults (mapMS,peak);
+disp(['Mean-Shift: peaks = ' int2str(size(peak,1))])
 
 % (6.3)
 [mapEM cluster] = EM(imglab);
