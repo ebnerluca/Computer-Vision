@@ -13,8 +13,8 @@ end
 nbSamples = size(X,1);
 nbBins_theta = 12;
 nbBins_r = 5;
-smallest_r = 1/8;%length of the smallest radius (assuming normalized distances)
-biggest_r = 3;%length of the biggest radius (assuming normalized distances)
+smallest_r = 1/8;  %length of the smallest radius (assuming normalized distances)
+biggest_r = 3;  %length of the biggest radius (assuming normalized distances)
 maxIterations = 6;
 
 
@@ -56,8 +56,9 @@ while currentIteration <= maxIterations
    ShapeDescriptors2 = sc_compute(Y',nbBins_theta,nbBins_r,smallest_r,biggest_r);
    disp('done.')
 
-   %set lambda here      
-   %lambda = mean_dist^2;  
+   %set lambda here (regularization parameter for TPS model estimation)
+   pw_dist_y = pdist(Y);  
+   lambda = (sum(pw_dist_y) / size(pw_dist_y, 2))^2;  % (mean_dist_y)^2; 
    
    %write the chi2_cost.m function
    costMatrixC = chi2_cost(ShapeDescriptors1,ShapeDescriptors2);   
