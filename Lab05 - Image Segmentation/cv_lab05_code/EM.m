@@ -15,7 +15,7 @@ N = size(img,1)*size(img,2); % number of pixels
 X = [reshape(img(:,:,1),N,1), reshape(img(:,:,2),N,1), reshape(img(:,:,3),N,1)];
 
 % fix number of segments to {3,4,5}, depending on exercise
-K = 4
+K = 5;
 
 % get L*a*b range of dataset
 min_lab = [min(X(:,1)), min(X(:,2)), min(X(:,3))];
@@ -49,4 +49,10 @@ end
 % form map of img size where each entry contains index of its segment
 map = reshape(indices,size(img(:,:,1)));
 cluster = mu_current;
+
+% output gaussian parameters for report
+K = K
+mu = mu_current
+var = var_current
+alpha = alpha_current
 end
