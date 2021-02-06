@@ -13,7 +13,7 @@ IMG_NAME = 'images/image001.jpg';
 %point.
 %You don't have to do this all the time, just store the resulting xy and
 %XYZ matrices and use them as input for your algorithms.
-[xy, XYZ] = getpoints(IMG_NAME);
+%[xy, XYZ] = getpoints(IMG_NAME);
 
 % === Task 1 Data normalization ===
 [xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
